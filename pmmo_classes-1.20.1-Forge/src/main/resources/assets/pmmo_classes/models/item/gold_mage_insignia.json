@@ -1,9 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "pmmo_classes:item/insignia_base",
-    "layer1": "pmmo_classes:item/insignia_gold",
-    "layer2": "pmmo_classes:item/insignia_mage1",
-    "layer3": "pmmo_classes:item/insignia_mage2"
+    "layer0":"pmmo_classes:item/insignia_mage2"
   }
 }

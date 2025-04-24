@@ -1,10 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "pmmo_classes:item/insignia_base",
-    "layer1": "pmmo_classes:item/insignia_emerald",
-    "layer2": "pmmo_classes:item/insignia_priest1",
-    "layer3": "pmmo_classes:item/insignia_priest2",
-    "layer4": "pmmo_classes:item/insignia_priest3"
+    "layer0": "pmmo_classes:item/insignia_priest3"
   }
 }

@@ -35,15 +35,15 @@ public class ForgeEvents {
                 .filter(entry -> entry.getValue() == 0L)
                 .map(Map.Entry::getKey).toList();
 
-        if(!skillsToClear.isEmpty()) {
+        if (!skillsToClear.isEmpty()) {
             PMMOUtil.deleteSkills(serverPlayer, skillsToClear);
         }
 
         PlayerClassProfile playerClassProfile = new PlayerClassProfile(serverPlayer);
-        if(playerClassProfile.checkAndUpdatePrimaryClasses(serverPlayer)) {
+        if (playerClassProfile.checkAndUpdatePrimaryClasses(serverPlayer)) {
             playerClassProfile.refreshProfile(serverPlayer);
         }
-        if(playerClassProfile.checkAndUpdateSubClasses(serverPlayer, null)) {
+        if (playerClassProfile.checkAndUpdateSubClasses(serverPlayer, null)) {
             playerClassProfile.refreshProfile(serverPlayer);
         }
         playerClassProfile.checkAndUpdateAscendedClasses(serverPlayer);
@@ -51,7 +51,7 @@ public class ForgeEvents {
 
     @SubscribeEvent
     public static void onSkillGranted(SkillGrantEvent.Post event) {
-        if(event.getEntity() instanceof ServerPlayer serverPlayer) {
+        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
             handleSkillGrant(serverPlayer, event);
         }
     }
@@ -61,7 +61,7 @@ public class ForgeEvents {
             PlayerClassProfile playerClassProfile = new PlayerClassProfile(serverPlayer);
             playerClassProfile.checkAndUpdateAscendedClasses(serverPlayer);
 
-            if(classSkill.getClassType() == ClassType.SUB) {
+            if (classSkill.getClassType() == ClassType.SUB) {
                 playerClassProfile.checkAndUpdateSubClasses(serverPlayer, (SubClassSkill) classSkill);
             }
         });

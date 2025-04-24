@@ -1,7 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "pmmo_classes:item/insignia_plain",
-    "layer1": "pmmo_classes:item/insignia_ranger"
+    "layer0": "pmmo_classes:item/insignia_ranger"
   }
 }
