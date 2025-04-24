@@ -9,10 +9,11 @@ import net.silvertide.pmmo_classes.PMMOClasses;
 import net.silvertide.pmmo_classes.client.keybindings.Keybindings;
 import net.silvertide.pmmo_classes.gui.ManageClassesScreen;
 
-@Mod.EventBusSubscriber(modid = PMMOClasses.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = PMMOClasses.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ClientForgeEvents {
+
     @SubscribeEvent
-    public static void clientTick(TickEvent.ClientTickEvent clientTickEvent) {
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
         if(Minecraft.getInstance().player == null) return;
         if(Keybindings.INSTANCE.useOpenManageClassesKey.consumeClick()) {
             Minecraft.getInstance().setScreen(new ManageClassesScreen());
