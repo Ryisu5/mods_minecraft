@@ -27,8 +27,12 @@ public class ItemRegistry {
     // Metodo helper para registrar insignias
     private static RegistryObject<Item> registerInsignia(String name, List<String> skills, String applicationType,
                                                          Long value, int experienceCost, String rank, String color) {
+        // Asegúrate de que el nombre no se divida incorrectamente
+        String[] nameParts = name.split("_");
+        String className = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+
         SkillGrantData skillGrantData = new SkillGrantData(
-                "pmmo_classes.insignia." + rank + "." + name.split("_")[1], // pmmo_classes.insignia.iron.warrior
+                "pmmo_classes.insignia." + rank + "." + className,
                 skills,
                 applicationType,
                 value,
@@ -38,7 +42,7 @@ public class ItemRegistry {
                 color
         );
 
-        return ITEMS.register(name + "_insignia", () -> new InsigniaItem(
+        return ITEMS.register(rank + "_" + className + "_insignia", () -> new InsigniaItem(
                 new Item.Properties().stacksTo(1),
                 skillGrantData
         ));
