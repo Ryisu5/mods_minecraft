@@ -49,21 +49,21 @@ public class ForgeEvents {
         playerClassProfile.checkAndUpdateAscendedClasses(serverPlayer);
     }
 
-    @SubscribeEvent
-    public static void onSkillGranted(SkillGrantEvent.Post event) {
-        if (event.getEntity() instanceof ServerPlayer serverPlayer) {
-            handleSkillGrant(serverPlayer, event);
+    @SubscribeEvent()
+    public static void onSkillGrantEvent(SkillGrantEvent.Post skillGrantEvent) {
+        if(skillGrantEvent.getEntity() instanceof ServerPlayer serverPlayer) {
+            ClassUtil.getClassSkill(skillGrantEvent.getSkill()).ifPresent(classSkill -> {
+
+                PlayerClassProfile playerClassProfile = new PlayerClassProfile(serverPlayer);
+
+                // Check if the player should receive an ascended class skill and grant it if so.
+                playerClassProfile.checkAndUpdateAscendedClasses(serverPlayer);
+
+                // Check if a subclass was added and a conflict exists. Remove the old one if so.
+                if(classSkill.getClassType() == ClassType.SUB) {
+                    playerClassProfile.checkAndUpdateSubClasses(serverPlayer, (SubClassSkill) classSkill);
+                }
+            });
         }
-    }
-
-    private static void handleSkillGrant(ServerPlayer serverPlayer, SkillGrantEvent.Post event) {
-        ClassUtil.getClassSkill(event.getSkill()).ifPresent(classSkill -> {
-            PlayerClassProfile playerClassProfile = new PlayerClassProfile(serverPlayer);
-            playerClassProfile.checkAndUpdateAscendedClasses(serverPlayer);
-
-            if (classSkill.getClassType() == ClassType.SUB) {
-                playerClassProfile.checkAndUpdateSubClasses(serverPlayer, (SubClassSkill) classSkill);
-            }
-        });
     }
 }
